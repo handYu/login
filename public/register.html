@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+    <h2>Register——注册</h2>
+    <div>
+        <input type="text" id="uname" placeholder="请输入您的用户名"/>
+    </div>
+	<div>
+        <input type="password" id="upwd" placeholder="请输入您的密码"/>
+    </div>
+    <div>
+        <input type="text" id="email" placeholder="请输入您的邮箱"/>
+    </div>
+    <div>
+        <input type="text" id="telephone" placeholder="请输入您的手机号"/>
+    </div>
+    <div>
+        <textarea id="message" cols="30" rows="10" placeholder="Message"></textarea>
+    </div>
+    <div>
+        <input type="button" value="注册" onclick="reg()">
+    </div>
+    <div id="sub"></div>
+	<script>
+			function reg(){
+				var xhr=new XMLHttpRequest();
+				xhr.onreadystatechange=function(){
+					if(xhr.readyState==4&&xhr.status==200){
+						var result=xhr.responseText;
+						sub.innerHTML=result;
+					}
+				}
+				xhr.open("post","/user/register",true);
+				var formdata="uname="+uname.value+"&upwd="+upwd.value+"&email="+email.value+"&telephone="+telephone.value+"&message="+message.value;
+				xhr.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+				xhr.send(formdata);
+			}
+	</script>
+</body>
+</html>

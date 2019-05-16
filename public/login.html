@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>Document</title>
+	</head>
+	<body>
+		<h2>Login——登录</h2>
+		name：<input type="text" id="uname" placeholder="输入您的名字"><br>	
+		upwd：<input type="password" id="upwd" placeholder="输入您的密码"><br>
+		<input type="button" value="登录" onclick="log()"><br>
+		<div id="dl"></div>
+		<script>
+			function log(){
+				var xhr=new XMLHttpRequest();
+				xhr.onreadystatechange=function(){
+					if(xhr.readyState==4&&xhr.status==200){
+						var result=xhr.responseText;
+						dl.innerHTML=result;
+					}
+				}
+				xhr.open("post","/user/login",true);
+				var formdata="uname="+uname.value+"&upwd="+upwd.value;
+				xhr.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+				xhr.send(formdata);
+			}
+		</script>
+	</body>
+</html>
